@@ -1,0 +1,27 @@
+.wrapper {
+  margin: 30px 30px 0 0px;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #e0e0e0;
+  padding: 7px;
+  background-color: rgba(66, 73, 134, 0.05);
+  border-radius: 10px;
+  box-shadow: 0 1px 1px;
+
+  p {
+    font-weight: bold
+  }
+
+  .inputWrapper {
+    display: flex;
+    margin-bottom: 5px;
+  }
+
+  .btns {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin-top: 10px;
+  }
+}
+

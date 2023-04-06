@@ -1,6 +1,5 @@
 .wrapper{
-  background-color: yellow;
-  height: 10000px;
-  width: 100px;
-  font-size: 200px;
+  margin: 0 30px 0 30px;
+  display: grid;
+  grid-template-columns: 1fr 4fr;
 }

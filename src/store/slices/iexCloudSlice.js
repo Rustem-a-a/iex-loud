@@ -1,41 +1,65 @@
 import {createSlice, createAsyncThunk} from "@reduxjs/toolkit";
 import axios from "axios";
+import {token} from "../../Api/iexApi";
+
 export const addSectors = createAsyncThunk('addSectorst',
-    async (id) => {
+    async () => {
         try {
-            const {data} = await axios('https://cloud.iexapis.com/stable/ref-data/sectors?token=pk_8e794ff0632745838028a41f6124dab3')
-            console.log(data)
+            const {data} = await axios('https://cloud.iexapis.com/stable/ref-data/sectors?token=' + token)
             return data
         } catch (e) {
-            console.log(e)
+        }
+    })
+export const addSectorCollection = createAsyncThunk('addSectorCollection',
+    async (sector = {name: 'Energy Minerals'}) => {
+        try {
+            const {data} = await axios(`https://cloud.iexapis.com/stable/stock/market/collection/sector?collectionName=${sector.name}&token=` + token)
+            return data
+        } catch (e) {
         }
     })
 const initialState = {
     sectors: [],
-    sectorCollection: []
+    currentSector: '',
+    sectorCollection: [],
+    filteredSectorCollection: [],
+    loadingTable: false
 }
-
 const iexCloudSlice = createSlice(
     {
         name: 'iex',
         initialState,
-        reducers:{
-            addSectorCollection(state,action){
-
+        reducers: {
+            filterSectorCollection(state, action) {
+                state.filteredSectorCollection = action.payload
+            },
+            setCurrentSector(state, action) {
+                state.currentSector = action.payload
             }
-
         },
         extraReducers: {
             [addSectors.pending]: (state) => {
+                state.loadingTable = true
             },
             [addSectors.fulfilled]: (state, action) => {
                 state.sectors = action.payload
+                addSectorCollection()
             },
             [addSectors.rejected]: (state) => {
+            },
+            [addSectorCollection.pending]: (state) => {
+                state.loadingTable = true
+            },
+            [addSectorCollection.fulfilled]: (state, action) => {
+                state.sectorCollection = action.payload
+                state.filteredSectorCollection = action.payload
+                state.loadingTable = false
+            },
+            [addSectorCollection.rejected]: (state) => {
             },
         }
     }
 )
 
-export const {addSectorCollection} = iexCloudSlice.actions
+export const {filterSectorCollection, setCurrentSector} = iexCloudSlice.actions
 export default iexCloudSlice.reducer

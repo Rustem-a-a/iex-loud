@@ -1,0 +1,48 @@
+.wrapper {
+  margin-top: 30px;
+
+  h1 {
+    margin-bottom: 20px;
+  }
+
+  .liWrapper {
+    &:hover {
+      background-color: rgb(0, 0, 0);
+    }
+  }
+
+  .item {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr 1fr 1fr 1fr;
+    text-align: center;
+
+    &:hover {
+      background-color: rgba(143, 161, 168, 0.17);
+    }
+
+    .red {
+      color: red;
+    }
+
+    .green {
+      color: #6bde6b;
+    }
+
+    div {
+      border: 1px rgba(128, 128, 128, 0.15) solid;
+      height: 60px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+
+  .navigation {
+    display: flex;
+    gap: 20px;
+    justify-content: end;
+    font-weight: bold;
+    cursor: pointer;
+  }
+}
+
