@@ -1,8 +1,8 @@
-import * as React from 'react';
+import React from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 
-export default function FormPropsTextFields({label, size, value, setChange, ...props}) {
+ const Input = ({label, size, value, setChange,filter,style, ...props}) => {
     return (
         <Box
             component="form"
@@ -10,8 +10,15 @@ export default function FormPropsTextFields({label, size, value, setChange, ...p
             noValidate
             autoComplete="off"
         >
-            <TextField {...props} style={{width: 150, backgroundColor: 'rgba(143,161,168,0.17)'}} value={value}
+            <TextField
+             onKeyDown={e=>{
+                    if(e.key==='Enter'){
+                        filter()
+                        e.preventDefault()}}}
+                {...props} style={style} value={value}
              onChange={event => {setChange(event.target.value)}} id="outlined-search" label={label} size={size}/>
         </Box>
     );
 }
+
+export default Input

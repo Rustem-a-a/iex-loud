@@ -1,24 +1,25 @@
 import React, {useEffect} from 'react';
 import Filters from "../Filters/Filters";
-import {useDispatch, useSelector} from "react-redux";
+import {useSelector} from "react-redux";
 import styles from './Main.module.scss'
-import {filterSectorCollection} from "../../store/slices/iexCloudSlice";
 import Preloader from '../Preloader/Preloader'
 import List from '../List/List'
+import {Route,Routes} from "react-router-dom";
+import Table from '../Table/Table'
 
 const Main = () => {
-    const dispatch = useDispatch()
-    const sectorCollection = useSelector(state => state.iexCloudReducer.sectorCollection)
+    const filteredSectorCollection = useSelector(state => state.iexCloudReducer.filteredSectorCollection)
     const loadingTable = useSelector(state => state.iexCloudReducer.loadingTable)
-    useEffect(() => {
-        dispatch(filterSectorCollection(sectorCollection))
-    }, [sectorCollection])
     return (
         <div className={styles.wrapper}>
             <Filters/>
             {!loadingTable
-                ? <List/>
-                // ? <Table rows={filteredSectorCollection}/>
+                ?  <>
+                  <Routes>
+                    <Route path='/' element={ <List/>}/>
+                    <Route path='/muitable' element={ <Table rows={filteredSectorCollection}/>}/>
+                  </Routes>
+                  </>
                 : <Preloader/>}
         </div>
     );

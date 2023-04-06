@@ -2,6 +2,8 @@ import React from 'react';
 import Box from '@mui/material/Box';
 import {DataGrid} from '@mui/x-data-grid';
 import {useSelector} from "react-redux";
+import {Link} from "react-router-dom";
+import styles from './Table.module.scss'
 
 const columns = [
     {
@@ -16,7 +18,7 @@ const columns = [
     },
     {
         field: 'companyName',
-        headerName: 'Company Name',
+        headerName: 'Company name',
         editable: false,
         headerAlign: 'center',
         align: 'left',
@@ -25,7 +27,7 @@ const columns = [
     },
     {
         field: 'latestPrice',
-        headerName: 'Latest Price',
+        headerName: 'Latest price',
         type: 'number',
         width: 130,
         editable: false,
@@ -35,7 +37,7 @@ const columns = [
     },
     {
         field: 'previousClose',
-        headerName: 'Previous Close',
+        headerName: 'Previous close',
         description: 'This column has a value getter and is not sortable.',
         width: 130,
         editable: false,
@@ -55,7 +57,7 @@ const columns = [
     },
     {
         field: 'latestUpdate',
-        headerName: 'Latest Update',
+        headerName: 'Latest update',
         description: 'This column has a value getter and is not sortable.',
         width: 130,
         editable: false,
@@ -67,11 +69,13 @@ const columns = [
 ];
 
 export default function DataGridDemo({rows}) {
-    const currentSector = useSelector(state => state.iexCloudReducer.currentSector)
+    const currentSector = useSelector(state => state.iexCloudReducer?.currentSector)
     return (
         <Box sx={{height: '85%', width: '100%', margin: 'auto', marginTop: '30px'}}>
-            <h1>Current sector:
-                {currentSector ? currentSector?.name : 'Please select sector'}</h1>
+            <div className={styles.upperTable}>
+                <h1>Current sector: {currentSector ? currentSector?.name : 'Please select sector'}</h1>
+                <Link data-testid='custom-link' to='/'>Custom table</Link>
+            </div>
             <DataGrid
                 sx={{
                     '& .super-app-theme--header': {
@@ -84,7 +88,7 @@ export default function DataGridDemo({rows}) {
                 style={{margin: "auto", marginTop: '30px'}}
                 rows={rows}
                 columns={columns}
-                getRowId={(row) => row.symbol}
+                getRowId={(row) => row?.symbol}
                 initialState={{
                     pagination: {
                         paginationModel: {

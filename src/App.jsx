@@ -3,11 +3,10 @@ import {useDispatch} from "react-redux";
 import {addSectors} from "./store/slices/iexCloudSlice";
 import Main from "./components/Main/Main";
 import Header from "./components/Header/Header";
+
 const App = () => {
     const dispatch = useDispatch()
-    useEffect(()=>{
-        dispatch(addSectors())
-    },[])
+    useEffect(()=>{dispatch(addSectors())},[])
     return (
         <div>
             <Header/>

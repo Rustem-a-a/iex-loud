@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
@@ -19,7 +19,6 @@ function HideOnScroll(props) {
         </Slide>
     );
 }
-
 HideOnScroll.propTypes = {
     children: PropTypes.element.isRequired,
     window: PropTypes.func,
@@ -30,18 +29,15 @@ export default function Header(props) {
         <React.Fragment>
             <CssBaseline />
             <HideOnScroll {...props}>
-                <AppBar style={{backgroundColor:'#abbac7',color:'black'}}>
+                <AppBar style={{backgroundColor:'#000000D2',color:'white'}}>
                     <Toolbar >
                         <Typography  variant="h4" component="div">
-                            <h3>Sectors and companies report</h3>
+                            <h3 data-testid = 'title-header'>Sectoral report by companies</h3>
                         </Typography>
                     </Toolbar>
                 </AppBar>
             </HideOnScroll>
             <Toolbar />
-            <Container>
-
-            </Container>
         </React.Fragment>
     );
 }

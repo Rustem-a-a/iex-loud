@@ -2,7 +2,7 @@ import {createSlice, createAsyncThunk} from "@reduxjs/toolkit";
 import axios from "axios";
 import {token} from "../../Api/iexApi";
 
-export const addSectors = createAsyncThunk('addSectorst',
+export const addSectors = createAsyncThunk('addSectors',
     async () => {
         try {
             const {data} = await axios('https://cloud.iexapis.com/stable/ref-data/sectors?token=' + token)
@@ -11,14 +11,14 @@ export const addSectors = createAsyncThunk('addSectorst',
         }
     })
 export const addSectorCollection = createAsyncThunk('addSectorCollection',
-    async (sector = {name: 'Energy Minerals'}) => {
+    async (sector= {name: 'Energy Minerals'}) => {
         try {
             const {data} = await axios(`https://cloud.iexapis.com/stable/stock/market/collection/sector?collectionName=${sector.name}&token=` + token)
             return data
         } catch (e) {
         }
     })
-const initialState = {
+export const initialState = {
     sectors: [],
     currentSector: '',
     sectorCollection: [],

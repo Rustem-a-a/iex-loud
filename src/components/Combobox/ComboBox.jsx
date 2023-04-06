@@ -5,8 +5,8 @@ import {useDispatch, useSelector} from "react-redux";
 import {useEffect, useState} from "react";
 import {addSectorCollection, filterSectorCollection, setCurrentSector} from "../../store/slices/iexCloudSlice";
 
-export default function ComboBox() {
-    const sectors = useSelector(state => state.iexCloudReducer.sectors)
+ const ComboBox = () => {
+    const sectors = useSelector(state => state.iexCloudReducer?.sectors)
     const [sector, setSector] = useState({name: 'Energy Minerals'})
     const dispatch = useDispatch()
     useEffect(() => {
@@ -15,7 +15,7 @@ export default function ComboBox() {
     }, [sector])
     return (
         <Autocomplete
-                style={{margin: '10px 0 10px 0'}}
+                style={{margin: '10px 15px 10px 15px'}}
                 disablePortal
                 value={sector}
                 onChange={(event, newValue) => {
@@ -34,3 +34,5 @@ export default function ComboBox() {
             />
     );
 }
+
+export default ComboBox

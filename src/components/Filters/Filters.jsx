@@ -4,10 +4,10 @@ import Input from '../Input/Input';
 import ButtonCustom from "../Button/ButtonCustom";
 import {useDispatch, useSelector} from "react-redux";
 import {filterSectorCollection} from "../../store/slices/iexCloudSlice";
-import styles from './Filter.module.scss'
+import styles from './Filters.module.scss'
 
 const Filters = () => {
-    const sectorCollection = useSelector(state => state.iexCloudReducer.sectorCollection)
+    const sectorCollection = useSelector(state => state.iexCloudReducer?.sectorCollection)
     const dispatch = useDispatch()
     const [symbol, setSymbol] = useState('')
     const [companyName, setCompanyName] = useState('')
@@ -20,7 +20,7 @@ const Filters = () => {
     const [latestUpdateFrom, setLatestUpdateFrom] = useState('')
     const [latestUpdateTo, setLatestUpdateTo] = useState('')
     const filterTable = (sectorCollection) => {
-        dispatch(filterSectorCollection(sectorCollection.filter((item) =>
+        const filtered = sectorCollection.filter((item) =>
             (!symbol || item.symbol === symbol)
             && (!companyName || item.companyName === companyName)
             && (!latestPriceFrom || item.latestPrice >= latestPriceFrom)
@@ -31,7 +31,8 @@ const Filters = () => {
             && (!changeTo || item.change <= changeTo)
             && (!latestUpdateFrom || new Date(item.latestUpdate) >= new Date(latestUpdateFrom))
             && (!latestUpdateTo || new Date(item.latestUpdate) <= new Date(latestUpdateTo))
-        )))
+        )
+        dispatch(filterSectorCollection(filtered))
     }
     const clearFilterTable = (sectorCollection) => {
         setSymbol('')
@@ -52,31 +53,31 @@ const Filters = () => {
             <ComboBox/>
             <p>Symbol:</p>
             <div className={styles.inputWrapper}>
-                <Input value={symbol} setChange={setSymbol} size='small' label='Symbol'/>
+                <Input filter={()=>{filterTable(sectorCollection)}} value={symbol} setChange={setSymbol} style={{width: 316, backgroundColor: 'rgba(143,161,168,0.17)'}} size='small' label='Symbol'/>
             </div>
             <p>Company name:</p>
             <div className={styles.inputWrapper}>
-                <Input value={companyName} setChange={setCompanyName} size='small' label='Company name'/>
+                <Input filter={()=>{filterTable(sectorCollection)}} value={companyName} setChange={setCompanyName} style={{width: 316, backgroundColor: 'rgba(143,161,168,0.17)'}} size='small' label='Company name'/>
             </div>
             <p>Latest price:</p>
             <div className={styles.inputWrapper}>
-                <Input value={latestPriceFrom} setChange={setLatestPriceFrom} size='small' label='From'/>
-                <Input value={latestPriceTo} setChange={setLatestPriceTo} size='small' label='To'/>
+                <Input filter={()=>{filterTable(sectorCollection)}} value={latestPriceFrom} setChange={setLatestPriceFrom} style={{width: 150, backgroundColor: 'rgba(143,161,168,0.17)'}} size='small' label='From'/>
+                <Input filter={()=>{filterTable(sectorCollection)}} value={latestPriceTo} setChange={setLatestPriceTo} style={{width: 150, backgroundColor: 'rgba(143,161,168,0.17)'}} size='small' label='To'/>
             </div>
             <p>Previous close:</p>
             <div className={styles.inputWrapper}>
-                <Input value={previousCloseFrom} setChange={setPreviousCloseFrom} size='small' label='From'/>
-                <Input value={previousCloseTo} setChange={setPreviousCloseTo} size='small' label='To'/>
+                <Input filter={()=>{filterTable(sectorCollection)}} value={previousCloseFrom} setChange={setPreviousCloseFrom} style={{width: 150, backgroundColor: 'rgba(143,161,168,0.17)'}} size='small' label='From'/>
+                <Input filter={()=>{filterTable(sectorCollection)}} value={previousCloseTo} setChange={setPreviousCloseTo} style={{width: 150, backgroundColor: 'rgba(143,161,168,0.17)'}} size='small' label='To'/>
             </div>
             <p>Change:</p>
             <div className={styles.inputWrapper}>
-                <Input value={changeFrom} setChange={setChangeFrom} size='small' label='From'/>
-                <Input value={changeTo} setChange={setChangeTo} size='small' label='To'/>
+                <Input filter={()=>{filterTable(sectorCollection)}} value={changeFrom} setChange={setChangeFrom} style={{width: 150, backgroundColor: 'rgba(143,161,168,0.17)'}} size='small' label='From'/>
+                <Input filter={()=>{filterTable(sectorCollection)}} value={changeTo} setChange={setChangeTo} style={{width: 150, backgroundColor: 'rgba(143,161,168,0.17)'}} size='small' label='To'/>
             </div>
             <p>Latest update:</p>
             <div className={styles.inputWrapper}>
-                <Input type='date' value={latestUpdateFrom} setChange={setLatestUpdateFrom} size='small' label=''/>
-                <Input type='date' value={latestUpdateTo} setChange={setLatestUpdateTo} size='small' label=''/>
+                <Input filter={()=>{filterTable(sectorCollection)}} type='date' value={latestUpdateFrom} setChange={setLatestUpdateFrom} style={{width: 150, backgroundColor: 'rgba(143,161,168,0.17)'}} size='small' label=''/>
+                <Input filter={()=>{filterTable(sectorCollection)}} type='date' value={latestUpdateTo} setChange={setLatestUpdateTo} style={{width: 150, backgroundColor: 'rgba(143,161,168,0.17)'}} size='small' label=''/>
             </div>
             <div className={styles.btns}>
                 <ButtonCustom style={{alignSelf: 'center', width: '100px'}} clickFunction={() => {
