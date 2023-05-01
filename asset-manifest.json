@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/iexcloud/static/css/main.43f035a0.css",
-    "main.js": "/iexcloud/static/js/main.460b9e18.js",
+    "main.js": "/iexcloud/static/js/main.b18aae53.js",
     "index.html": "/iexcloud/index.html",
     "main.43f035a0.css.map": "/iexcloud/static/css/main.43f035a0.css.map",
-    "main.460b9e18.js.map": "/iexcloud/static/js/main.460b9e18.js.map"
+    "main.b18aae53.js.map": "/iexcloud/static/js/main.b18aae53.js.map"
   },
   "entrypoints": [
     "static/css/main.43f035a0.css",
-    "static/js/main.460b9e18.js"
+    "static/js/main.b18aae53.js"
   ]
 }
